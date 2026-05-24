@@ -1,0 +1,56 @@
+PROJECT OVERVIEW
+================
+
+Project Title:
+  E-Commerce Fulfillment and Customer Satisfaction Analytics Dashboard
+
+Objective:
+  Analyze approximately 100,000 Brazilian e-commerce orders from the Olist dataset
+  to understand delivery performance, freight cost patterns, product category revenue,
+  payment behavior, and the relationship between late deliveries and customer review scores.
+
+Dataset:
+  Brazilian E-Commerce Public Dataset by Olist
+  Source: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+  Format: Multiple connected CSV files (relational structure)
+  Size: ~100,000 orders, covering 2016–2018
+
+Selected Tables (Required):
+  1. olist_orders_dataset.csv         — order dates, status, delivery info
+  2. olist_order_items_dataset.csv    — price, freight, product and seller IDs
+  3. olist_order_payments_dataset.csv — payment type and value
+  4. olist_order_reviews_dataset.csv  — customer review scores
+  5. olist_customers_dataset.csv      — customer city and state
+  6. olist_products_dataset.csv       — product category names
+  7. product_category_name_translation.csv — English category labels
+
+Optional Tables (for later improvement):
+  - olist_sellers_dataset.csv         — seller location (if seller analysis is added)
+  - olist_geolocation_dataset.csv     — geographic coordinates (if map is added)
+
+Business Questions:
+  1. How many orders were placed each month, and which months show higher activity?
+  2. Which product categories produce the highest revenue and order volume?
+  3. Which customer states show higher late-delivery rates or longer delivery times?
+  4. Do late deliveries receive lower review scores than on-time deliveries?
+  5. Which payment types are used most often, and how do they relate to order value?
+  6. How does freight cost vary across states, categories, or order value ranges?
+
+Final Deliverables:
+  - Cleaned CSV dataset (data/cleaned/)
+  - SQL schema, queries, and reusable views (sql/)
+  - Flask REST API with 7 JSON endpoints (backend/)
+  - Web dashboard with KPI cards and Chart.js charts (frontend/)
+  - Tableau Public dashboard with filters and KPI cards (tableau/)
+  - AWS S3 static hosting notes (aws/)
+  - GitHub repository with full documentation (README.md)
+
+Revenue Definition (IMPORTANT — must stay consistent across all tools):
+  revenue = price + freight_value
+  This definition will be used in Python, SQL, Flask API, Chart.js frontend, and Tableau.
+  All KPIs referencing revenue must use this exact formula.
+
+Late Delivery Definition:
+  is_late_delivery = YES when (delivered_customer_date > order_estimated_delivery_date)
+  estimated_delay_days = delivered_customer_date - order_estimated_delivery_date
+  Positive value = arrived late. Negative or zero = arrived on time or early.
