@@ -83,3 +83,22 @@
 | order_weekday | weekday from purchase_timestamp | Used for weekly pattern analysis |
 | review_group | 1-2 → Low, 3 → Medium, 4-5 → High | Satisfaction group label |
 | delivery_bucket | Based on delivery_days thresholds | Fast / Normal / Slow grouping |
+
+## Engineered Features — Created in Day 6
+
+| Feature | Formula | Type | Description |
+|---------|---------|------|-------------|
+| delivery_days | delivered_date - purchase_timestamp (days) | integer | Days customer waited for delivery |
+| estimated_delay_days | delivered_date - estimated_delivery_date (days) | integer | Positive = late, Negative = early |
+| is_late_delivery | 'Yes' if estimated_delay_days > 0 else 'No' | string | Late delivery flag |
+| order_month | Month period from purchase_timestamp | string | e.g. '2017-11' for trend charts |
+| order_year | Year from purchase_timestamp | integer | Year of purchase |
+| order_weekday | Day name from purchase_timestamp | string | e.g. 'Monday' |
+| order_hour | Hour from purchase_timestamp | integer | Hour of day (0-23) |
+| revenue | price + freight_value | float | Total item value including shipping |
+| freight_ratio | freight_value / price (where price > 0) | float | Shipping cost relative to item price |
+| review_group | 1-2 → Low, 3 → Medium, 4-5 → High, null → No Review | string | Satisfaction tier label |
+| delivery_bucket | ≤7 → Fast, 8-20 → Normal, >20 → Slow | string | Delivery speed grouping |
+
+### Metric Consistency Rule
+revenue = price + freight_value in ALL tools: Python, SQL, Flask, Tableau, and frontend.

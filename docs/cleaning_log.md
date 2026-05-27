@@ -34,3 +34,14 @@
 - Raw files in `data/raw/` were never modified
 - All cleaning applied to in-memory DataFrames only
 - Cleaned DataFrames will be joined and exported in Day 5-6
+
+## Null Value Decisions
+
+| Column | Null Count | Decision | Reason |
+|--------|-----------|----------|--------|
+| delivery_days | ~2,965 | Keep as NULL | Orders not delivered — no real value exists |
+| estimated_delay_days | ~2,965 | Keep as NULL | Same as above |
+| review_score | ~15,698 | Keep as NULL | No review submitted — 'No Review' label in review_group |
+| freight_ratio | ~2 | Keep as NULL | price = 0, division undefined |
+| review_group | 0 | N/A | Nulls replaced with 'No Review' label ✅ |
+| delivery_bucket | 0 | N/A | Nulls replaced with 'Unknown' label ✅ |
