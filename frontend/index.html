@@ -11,14 +11,21 @@
 
   <!-- ── HEADER ─────────────────────────────────────────── -->
   <header class="header">
-    <div class="header-left">
-      <h1 class="header-title">🛒 E-Commerce Analytics</h1>
-      <span class="header-badge">Olist Brazil Dataset</span>
+  <div class="header-left">
+    <div class="header-logo">🛒</div>
+    <div>
+      <h1 class="header-title">E-Commerce Analytics</h1>
+      <span class="header-subtitle">Olist Brazil · 96,470 Orders · 2016–2018</span>
     </div>
-    <div class="header-right">
-      <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+  </div>
+  <div class="header-right">
+    <div class="header-status">
+      <span class="status-dot"></span>
+      <span class="status-text">Live API</span>
     </div>
-  </header>
+    <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+  </div>
+</header>
 
   <!-- ── PAGE INTRO ─────────────────────────────────────── -->
   <section class="page-intro">
@@ -31,27 +38,27 @@
     <div class="kpi-card">
       <div class="kpi-icon">📦</div>
       <div class="kpi-label">Total Orders</div>
-      <div class="kpi-value" id="kpi-orders">—</div>
+      <div class="kpi-value loading" id="kpi-orders">—</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-icon">💰</div>
       <div class="kpi-label">Total Revenue</div>
-      <div class="kpi-value" id="kpi-revenue">—</div>
+      <div class="kpi-value loading" id="kpi-revenue">—</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-icon">🚚</div>
       <div class="kpi-label">Avg Delivery Days</div>
-      <div class="kpi-value" id="kpi-delivery">—</div>
+      <div class="kpi-value loading" id="kpi-delivery">—</div>
     </div>
     <div class="kpi-card kpi-card--warning">
       <div class="kpi-icon">⚠️</div>
       <div class="kpi-label">Late Delivery Rate</div>
-      <div class="kpi-value" id="kpi-late">—</div>
+      <div class="kpi-value loading" id="kpi-late">—</div>
     </div>
     <div class="kpi-card kpi-card--success">
       <div class="kpi-icon">⭐</div>
       <div class="kpi-label">Avg Review Score</div>
-      <div class="kpi-value" id="kpi-review">—</div>
+      <div class="kpi-value loading" id="kpi-review">—</div>
     </div>
   </section>
 

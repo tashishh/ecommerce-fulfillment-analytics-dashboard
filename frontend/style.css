@@ -217,3 +217,117 @@ body {
 .rate-high   { color: #e74c3c; font-weight: 600; }
 .rate-medium { color: #f39c12; font-weight: 600; }
 .rate-low    { color: #2ecc71; font-weight: 600; }
+
+/* ── KPI Loading State ──────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.kpi-value.loading {
+  animation: pulse 1.2s ease-in-out infinite;
+  color: var(--text-secondary);
+}
+
+/* ── Header Improvements ────────────────────────────────── */
+.header-logo {
+  font-size: 2rem;
+  margin-right: var(--space-3, 12px);
+}
+
+.header-subtitle {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: #2ecc71;
+  margin-right: 12px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #2ecc71;
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .kpi-section {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .kpi-section {
+    grid-template-columns: 1fr 1fr;
+    padding: 12px 20px;
+  }
+
+  .charts-row,
+  .table-section {
+    padding: 8px 20px;
+  }
+
+  .page-intro {
+    padding: 20px 20px 8px;
+  }
+}
+
+.data-table small {
+  font-size: 0.7rem;
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+/* ── Page Accent Line ───────────────────────────────────── */
+body::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #4f8ef7, #2ecc71, #f39c12);
+}
+
+/* ── Chart Card Hover Effect ────────────────────────────── */
+.chart-card {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.chart-card:hover {
+  border-color: rgba(79, 142, 247, 0.4);
+  box-shadow: 0 4px 20px rgba(79, 142, 247, 0.08);
+}

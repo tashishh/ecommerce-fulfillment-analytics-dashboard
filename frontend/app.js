@@ -2,6 +2,25 @@
 // E-Commerce Analytics Dashboard — app.js
 // Fetches from Flask API and renders KPIs + Charts
 // ============================================================
+// ── Count-Up Animation ───────────────────────────────────────
+function animateValue(id, start, end, duration, prefix = "", suffix = "") {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove("loading");
+  const range = end - start;
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(start + range * eased);
+    el.textContent = prefix + current.toLocaleString() + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
 
 const API = "http://127.0.0.1:5000/api";
 
@@ -22,22 +41,11 @@ async function loadKPIs() {
     const res  = await fetch(`${API}/kpis`);
     const data = await res.json();
 
-    document.getElementById("kpi-orders").textContent =
-      Number(data.total_orders).toLocaleString();
-
-    document.getElementById("kpi-revenue").textContent =
-      "$" + Number(data.total_revenue).toLocaleString("en-US", {
-        minimumFractionDigits: 0, maximumFractionDigits: 0
-      });
-
-    document.getElementById("kpi-delivery").textContent =
-      data.avg_delivery_days + " days";
-
-    document.getElementById("kpi-late").textContent =
-      data.late_delivery_rate + "%";
-
-    document.getElementById("kpi-review").textContent =
-      "⭐ " + data.avg_review_score;
+    animateValue("kpi-orders",   0, data.total_orders,          1500);
+    animateValue("kpi-revenue",  0, Math.round(data.total_revenue), 1500, "$");
+    animateValue("kpi-delivery", 0, Math.round(data.avg_delivery_days * 10) / 10, 1200, "", " days");
+    animateValue("kpi-late",     0, Math.round(data.late_delivery_rate * 10) / 10, 1200, "", "%");
+    animateValue("kpi-review",   0, Math.round(data.avg_review_score * 100) / 100, 1200, "⭐ ");
 
   } catch (err) {
     console.error("KPI fetch failed:", err);
@@ -234,19 +242,23 @@ async function loadStateDelivery() {
     tbody.innerHTML = "";
 
     data.forEach(row => {
-      const lateRate = parseFloat(row.late_delivery_rate);
-      const rateClass = lateRate > 15 ? "rate-high"
-                      : lateRate > 8  ? "rate-medium"
-                      : "rate-low";
+  const lateRate = parseFloat(row.late_delivery_rate);
+  const rateClass = lateRate > 15 ? "rate-high"
+                  : lateRate > 8  ? "rate-medium"
+                  : "rate-low";
 
-      tbody.innerHTML += `
-        <tr>
-          <td><strong>${row.customer_state}</strong></td>
-          <td>${Number(row.total_orders).toLocaleString()}</td>
-          <td>${row.avg_delivery_days} days</td>
-          <td class="${rateClass}">${lateRate}%</td>
-        </tr>`;
-    });
+  const rateLabel = lateRate > 15 ? "⚠️ High"
+                  : lateRate > 8  ? "⚡ Medium"
+                  : "✅ Good";
+
+  tbody.innerHTML += `
+    <tr>
+      <td><strong>${row.customer_state}</strong></td>
+      <td>${Number(row.total_orders).toLocaleString()}</td>
+      <td>${row.avg_delivery_days} days</td>
+      <td class="${rateClass}">${lateRate}% <small>${rateLabel}</small></td>
+    </tr>`;
+});
   } catch (err) {
     console.error("State delivery fetch failed:", err);
   }
