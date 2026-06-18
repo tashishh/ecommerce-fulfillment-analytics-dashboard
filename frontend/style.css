@@ -161,6 +161,14 @@ body {
   color: var(--accent);
 }
 
+#chart-payment {
+  max-height: 250px;
+}
+
+#chart-category-revenue {
+  max-height: 430px;
+}
+
 /* ── Table Section ──────────────────────────────────────── */
 .table-section { padding: 10px 40px; }
 
@@ -204,3 +212,8 @@ body {
   color: var(--text-secondary);
   padding: 30px;
 }
+
+/* ── Table Rate Colors ──────────────────────────────────── */
+.rate-high   { color: #e74c3c; font-weight: 600; }
+.rate-medium { color: #f39c12; font-weight: 600; }
+.rate-low    { color: #2ecc71; font-weight: 600; }
