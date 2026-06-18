@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Commerce Analytics Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ── HEADER ─────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-left">
+      <h1 class="header-title">🛒 E-Commerce Analytics</h1>
+      <span class="header-badge">Olist Brazil Dataset</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+    </div>
+  </header>
+
+  <!-- ── PAGE INTRO ─────────────────────────────────────── -->
+  <section class="page-intro">
+    <h2>Fulfillment &amp; Customer Satisfaction Dashboard</h2>
+    <p>Analyzing <span class="highlight">96,470 orders</span> across Brazil — delivery performance, revenue trends, and customer reviews.</p>
+  </section>
+
+  <!-- ── KPI CARDS ──────────────────────────────────────── -->
+  <section class="kpi-section">
+    <div class="kpi-card">
+      <div class="kpi-icon">📦</div>
+      <div class="kpi-label">Total Orders</div>
+      <div class="kpi-value" id="kpi-orders">—</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" id="kpi-revenue">—</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🚚</div>
+      <div class="kpi-label">Avg Delivery Days</div>
+      <div class="kpi-value" id="kpi-delivery">—</div>
+    </div>
+    <div class="kpi-card kpi-card--warning">
+      <div class="kpi-icon">⚠️</div>
+      <div class="kpi-label">Late Delivery Rate</div>
+      <div class="kpi-value" id="kpi-late">—</div>
+    </div>
+    <div class="kpi-card kpi-card--success">
+      <div class="kpi-icon">⭐</div>
+      <div class="kpi-label">Avg Review Score</div>
+      <div class="kpi-value" id="kpi-review">—</div>
+    </div>
+  </section>
+
+  <!-- ── ROW 2: Monthly Orders + Category Revenue ───────── -->
+  <section class="charts-row">
+    <div class="chart-card chart-card--wide">
+      <div class="chart-header">
+        <h3>📈 Monthly Orders Over Time</h3>
+        <span class="chart-badge" id="badge-peak-month">Peak: —</span>
+      </div>
+      <canvas id="chart-monthly-orders"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>🏆 Top Categories by Revenue</h3>
+      </div>
+      <canvas id="chart-category-revenue"></canvas>
+    </div>
+  </section>
+
+  <!-- ── ROW 3: Payment Breakdown ───────────────────────── -->
+  <section class="charts-row">
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>💳 Payment Methods</h3>
+      </div>
+      <canvas id="chart-payment"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>⭐ Review Score vs Delivery Status</h3>
+      </div>
+      <canvas id="chart-review-delivery"></canvas>
+    </div>
+  </section>
+
+  <!-- ── ROW 4: State Delivery Table ────────────────────── -->
+  <section class="table-section">
+    <div class="table-card">
+      <div class="chart-header">
+        <h3>🗺️ Delivery Performance by State</h3>
+        <span class="chart-badge">All 27 States</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table" id="state-table">
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Total Orders</th>
+              <th>Avg Delivery Days</th>
+              <th>Late Delivery Rate</th>
+            </tr>
+          </thead>
+          <tbody id="state-table-body">
+            <tr><td colspan="4" class="loading">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
