@@ -70,7 +70,7 @@ ecommerce-fulfillment-analytics-dashboard/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR-USERNAME/ecommerce-fulfillment-analytics-dashboard.git
+git clone https://github.com/tashishh/ecommerce-fulfillment-analytics-dashboard.git
 cd ecommerce-fulfillment-analytics-dashboard
 ```
 
